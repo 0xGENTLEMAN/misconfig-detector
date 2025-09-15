@@ -9,5 +9,5 @@ Lightweight Python tool to detect security misconfigurations in systems, service
 
 ## Installation
 ```bash
-git clone https://github.com/username/misconfig-detector.git
+git clone https://github.com/0xGENTLEMAN/misconfig-detector.git
 cd misconfig-detector
