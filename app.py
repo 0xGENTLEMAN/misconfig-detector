@@ -5,11 +5,10 @@ import pwd
 import sys
 
 BANNER = r"""
- __  __ _           _                       _             
-|  \/  (_)_ __ ___ (_) ___ ___  _ __  _   _| |_ ___  _ __ 
-| |\/| | | '_ ` _ \| |/ __/ _ \| '_ \| | | | __/ _ \| '__|
-| |  | | | | | | | | | (_| (_) | | | | |_| | || (_) | |   
-|_|  |_|_|_| |_| |_|_|\___\___/|_| |_|\__,_|\__\___/|_|   
+▄▖    ▗   ▜   ▄▖▌     ▗ 
+▙▌▀▌▛▘▜▘█▌▐   ▌ ▛▌▛▌▛▘▜▘
+▌ █▌▄▌▐▖▙▖▐▖  ▙▌▌▌▙▌▄▌▐▖
+                         
 """
 
 def check_file_permissions(path, must_not_world_writable=True):
@@ -30,9 +29,9 @@ def check_critical_files():
     for f in critical_files:
         status, message = check_file_permissions(f)
         if status is True:
-            print(f"[+] {f} permissions OK ✅")
+            print(f"[+] {f} permissions OK ")
         elif status is False:
-            print(f"[!] {f} has bad permissions ❌ ({message})")
+            print(f"[!] {f} has bad permissions X ({message})")
         else:
             print(f"[?] Could not check {f} ({message})")
 
@@ -41,18 +40,18 @@ def check_env_vars():
     print("[*] Checking environment variables...")
     path_var = os.getenv("PATH", "")
     if path_var.endswith(":"):
-        print("[!] PATH ends with ':' which may allow insecure binary execution ❌")
+        print("[!] PATH ends with ':' which may allow insecure binary execution ")
     else:
-        print("[+] Environment variables look fine ✅")
+        print("[+] Environment variables look fine ")
 
 def check_user_privileges():
     """Check if script runs as root."""
     print("[*] Checking user privileges...")
     if os.geteuid() == 0:
-        print("[!] Running as root. Be cautious ❌")
+        print("[!] Running as root. Be cautious ")
     else:
         user = pwd.getpwuid(os.geteuid()).pw_name
-        print(f"[+] Running as user: {user} ✅")
+        print(f"[+] Running as user: {user} ")
 
 def run_all_checks():
     print(BANNER)
